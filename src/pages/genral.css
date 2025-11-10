@@ -1,0 +1,10 @@
+.btn-purple {
+  background-color: #800080; /* A shade of purple */
+  border-color: #800080;
+  color: white;
+}
+
+.btn-purple:hover {
+  background-color: #6a0dad; /* Darker purple on hover */
+  border-color: #6a0dad;
+}

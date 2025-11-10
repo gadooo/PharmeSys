@@ -1,4 +1,6 @@
 import React from 'react'
+import "./genral.css";
+
 
 function Reports() {
   return (

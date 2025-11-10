@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import Drugs from "./pages/Drugs";
 import Sales from "./pages/Sales";
 import Reports from "./pages/Reports";
+import AddDrugForm from "./components/AddDrugForm";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/drugs" element={<Drugs />} />
           <Route path="/sales" element={<Sales />} />
           <Route path="/reports" element={<Reports />} />
+          <Route path="/add-drug" element={<AddDrugForm />} />
         </Routes>
       </div>
     </Router>
