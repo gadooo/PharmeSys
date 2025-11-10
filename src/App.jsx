@@ -1,16 +1,24 @@
-import { useState } from 'react'
-
-import './App.css'
-import Navbar from './components/NavBar'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/NavBar";
+import Dashboard from "./pages/Dashboard";
+import Drugs from "./pages/Drugs";
+import Sales from "./pages/Sales";
+import Reports from "./pages/Reports";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-     <Navbar />
-    </>
-  )
+    <Router>
+      <Navbar />
+      <div className="container mt-4">
+        <Routes>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/drugs" element={<Drugs />} />
+          <Route path="/sales" element={<Sales />} />
+          <Route path="/reports" element={<Reports />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;

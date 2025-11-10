@@ -1,4 +1,6 @@
 import React from "react";
+import Logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function Navbar() {
@@ -6,36 +8,37 @@ function Navbar() {
     <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "purple" }}>
       <div className="container-fluid">
         {/* Logo */}
-        <a className="navbar-brand text-white d-flex align-items-center" href="#">
+        <Link className="navbar-brand text-white d-flex align-items-center" to="/dashboard">
           <img
-            src="/logo.png"   // ضع صورة شعارك داخل public/logo.png
+            src={Logo}
             alt="OlaPharme Logo"
             width="40"
             height="40"
             className="d-inline-block align-text-top me-2"
           />
           OlaPharme
-        </a>
+        </Link>
 
         {/* Links */}
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link text-white" href="/dashboard">Dashboard</a>
+              <Link className="nav-link text-white" to="/dashboard">Dashboard</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-white" href="/drugs">Drugs</a>
+              <Link className="nav-link text-white" to="/drugs">Drugs</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-white" href="/sales">Sales</a>
+              <Link className="nav-link text-white" to="/sales">Sales</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-white" href="/reports">Reports</a>
+              <Link className="nav-link text-white" to="/reports">Reports</Link>
             </li>
           </ul>
         </div>
       </div>
     </nav>
+
   );
 }
 
