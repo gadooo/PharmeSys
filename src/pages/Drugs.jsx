@@ -1,14 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import "./genral.css";
+import { DrugContext } from "../context/DrugsContext";
 
-
-function Drugs() {
-  const [drugs, setDrugs] = useState([
-    { id: 1, name: "Paracetamol", quantity: 50, price: 5, expiryDate: "2025-01-01" },
-    { id: 2, name: "Ibuprofen", quantity: 30, price: 8, expiryDate: "2024-12-15" },
-    { id: 3, name: "Amoxicillin", quantity: 20, price: 12, expiryDate: "2025-03-10" },
-  ]);
+function DrugsList() {
+  const { drugs } = useContext(DrugContext);
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredDrugs = drugs.filter((drug) =>
@@ -18,8 +13,6 @@ function Drugs() {
   return (
     <div className="container mt-4">
       <h2>Drugs Inventory</h2>
-
-      {/* Search Bar */}
       <input
         type="text"
         className="form-control mb-3"
@@ -27,15 +20,9 @@ function Drugs() {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-
-      {/* Add Drug Button */}
       <div className="mb-3">
-        <Link to="/add-drug" className="btn btn-purple">
-          + Add New Drug
-        </Link>
+        <Link to="/add-drug" className="btn btn-purple">+ Add New Drug</Link>
       </div>
-
-      {/* Drugs Table */}
       <table className="table table-striped">
         <thead>
           <tr>
@@ -60,4 +47,4 @@ function Drugs() {
   );
 }
 
-export default Drugs;
+export default DrugsList;

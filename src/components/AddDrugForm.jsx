@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import "./genral.css"
-function AddDrugForm() {
+import { useContext } from "react";
+import { DrugContext } from "../context/DrugsContext";
+import { useNavigate } from "react-router-dom";
+function AddDrugForm(){
+  const { addDrug } = useContext(DrugContext);
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
@@ -8,13 +14,8 @@ function AddDrugForm() {
 
   const handleAddDrug = (e) => {
     e.preventDefault();
-    const newDrug = { name, quantity, price, expiryDate };
-    console.log("New Drug Added:", newDrug);
-    // هنا لاحقاً حنربط مع الـ API
-    setName("");
-    setQuantity("");
-    setPrice("");
-    setExpiryDate("");
+    addDrug({ name, quantity: parseInt(quantity), price: parseFloat(price), expiryDate });
+    navigate("/drugs"); // يرجعك لقائمة الأدوية بعد الإضافة
   };
 
   return (
@@ -23,52 +24,29 @@ function AddDrugForm() {
       <form onSubmit={handleAddDrug}>
         <div className="mb-3">
           <label className="form-label">Drug Name</label>
-          <input
-            type="text"
-            className="form-control"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
+          <input type="text" className="form-control" value={name}
+            onChange={(e) => setName(e.target.value)} required />
         </div>
-
         <div className="mb-3">
           <label className="form-label">Quantity</label>
-          <input
-            type="number"
-            className="form-control"
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-            required
-          />
+          <input type="number" className="form-control" value={quantity}
+            onChange={(e) => setQuantity(e.target.value)} required />
         </div>
-
         <div className="mb-3">
           <label className="form-label">Price ($)</label>
-          <input
-            type="number"
-            className="form-control"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            required
-          />
+          <input type="number" className="form-control" value={price}
+            onChange={(e) => setPrice(e.target.value)} required />
         </div>
-
         <div className="mb-3">
           <label className="form-label">Expiry Date</label>
-          <input
-            type="date"
-            className="form-control"
-            value={expiryDate}
-            onChange={(e) => setExpiryDate(e.target.value)}
-            required
-          />
+          <input type="date" className="form-control" value={expiryDate}
+            onChange={(e) => setExpiryDate(e.target.value)} required />
         </div>
-
         <button type="submit" className="btn btn-purple">Add Drug</button>
       </form>
     </div>
   );
 }
+
 
 export default AddDrugForm;

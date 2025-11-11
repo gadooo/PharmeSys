@@ -5,9 +5,14 @@ import Drugs from "./pages/Drugs";
 import Sales from "./pages/Sales";
 import Reports from "./pages/Reports";
 import AddDrugForm from "./components/AddDrugForm";
+import { DrugProvider } from "./context/DrugsContext";
+import { SalesProvider } from "./context/SalesContext";
 
 function App() {
   return (
+    <DrugProvider >
+      <SalesProvider>
+
     <Router>
       <Navbar />
       <div className="container mt-4">
@@ -20,6 +25,8 @@ function App() {
         </Routes>
       </div>
     </Router>
+    </SalesProvider>
+    </DrugProvider>
   );
 }
 

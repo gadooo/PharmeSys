@@ -16,7 +16,7 @@ function Navbar() {
             height="40"
             className="d-inline-block align-text-top me-2"
           />
-          OlaPharme
+          روح
         </Link>
 
         {/* Links */}
