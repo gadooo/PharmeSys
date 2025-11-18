@@ -1,10 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./genral.css";
 import { DrugContext } from "../context/DrugsContext";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { getDrugById } from "../API/DrugsAPI";
 
-function AddDrugForm() {
-  const { addDrug } = useContext(DrugContext);
+function EditDrugForm() {
+  const { updateDrug } = useContext(DrugContext);
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -12,21 +14,35 @@ function AddDrugForm() {
   const [price, setPrice] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
 
-  const handleAddDrug = (e) => {
+  useEffect(() => {
+    getDrugById(id)
+      .then((response) => {
+        const drug = response.data;
+        setName(drug.name);
+        setQuantity(drug.quantity);
+        setPrice(drug.price);
+        setExpiryDate(drug.expiryDate.split("T")[0]); // format for <input type="date">
+      })
+      .catch((error) => {
+        console.error("Error fetching drug data:", error);
+      });
+  }, [id]);
+
+  const handleUpdateDrug = async (e) => {
     e.preventDefault();
-    addDrug({
+    await updateDrug(id, {
       name,
       quantity: parseInt(quantity),
       price: parseFloat(price),
       expiryDate,
     });
-    navigate("/"); // يرجعك لقائمة الأدوية بعد الإضافة
+    navigate("/"); // back to drug list after update
   };
 
   return (
     <div className="container mt-4">
-      <h2 className="text-center mb-4">Add New Drug</h2>
-      <form onSubmit={handleAddDrug}>
+      <h2 className="text-center mb-4">Edit Drug</h2>
+      <form onSubmit={handleUpdateDrug}>
         <div className="mb-3">
           <label className="form-label">Drug Name</label>
           <input
@@ -74,11 +90,11 @@ function AddDrugForm() {
         </div>
 
         <button type="submit" className="btn btn-purple w-100">
-          Add Drug
+          Update Drug
         </button>
       </form>
     </div>
   );
 }
 
-export default AddDrugForm;
+export default EditDrugForm;

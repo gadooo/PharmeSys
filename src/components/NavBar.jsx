@@ -26,7 +26,7 @@ function Navbar() {
               <Link className="nav-link text-white" to="/dashboard">Dashboard</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white" to="/drugs">Drugs</Link>
+              <Link className="nav-link text-white" to="/">Drugs</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link text-white" to="/sales">Sales</Link>
